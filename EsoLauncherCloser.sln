@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsoLauncherCloser", "EsoLauncherCloser\EsoLauncherCloser.csproj", "{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29A68EFB-1116-439D-B74B-0582344DFA42}
+	EndGlobalSection
+EndGlobal
