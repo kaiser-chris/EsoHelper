@@ -10,7 +10,7 @@ The application supports two modes:
 Closes the launcher as soon as the game is launched.
 
 #### Inactive Close
-Closes the launcher 1 minute after the it was started or the game was closed.
+Closes the launcher 1 minute after it was started or the game was closed.
 This can be useful if you are experimenting with addons or are generally restarting the game often.
 
 ### Build
