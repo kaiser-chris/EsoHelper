@@ -18,7 +18,7 @@ namespace EsoLauncherCloser
         private MenuItem itemAutoClose;
         private MenuItem itemInactiveClose;
         private MenuItem itemLightAttackWeave;
-        private AutoHotkeyEngine autoHotkeyEngine = AutoHotkeyEngine.Instance;
+        private AutoHotkeyEngine autoHotkeyEngine = new AutoHotkeyEngine();
         private bool lightAttackScriptRunning = false;
 
         public MainForm()
@@ -120,6 +120,7 @@ namespace EsoLauncherCloser
             {
                 script = Encoding.UTF8.GetString(Properties.Resources.eso_light_attack_weave);
             }
+            autoHotkeyEngine = new AutoHotkeyEngine();
             autoHotkeyEngine.LoadScript(script);
             autoHotkeyEngine.SetVar("suspend", "false");
             autoHotkeyEngine.UnSuspend();
@@ -128,7 +129,6 @@ namespace EsoLauncherCloser
         private void unloadScript()
         {
             autoHotkeyEngine.Terminate();
-            autoHotkeyEngine.Reset();
             lightAttackScriptRunning = false;
         }
 
