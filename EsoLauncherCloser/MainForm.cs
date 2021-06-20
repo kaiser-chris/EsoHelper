@@ -18,7 +18,7 @@ namespace EsoLauncherCloser
         private MenuItem itemAutoClose;
         private MenuItem itemInactiveClose;
         private MenuItem itemLightAttackWeave;
-        private AutoHotkeyEngine autoHotkeyEngine = new AutoHotkeyEngine();
+        private AutoHotkeyEngine autoHotkeyEngine = new AutoHotkeyEngine(AutoHotKeyVersion.v1);
         private bool lightAttackScriptRunning = false;
 
         public MainForm()
@@ -39,7 +39,7 @@ namespace EsoLauncherCloser
             ContextMenu trayMenu = new ContextMenu();
             itemAutoClose = new MenuItem("Auto Close Mode", MenuAutoClose);
             itemInactiveClose = new MenuItem("Inactive Close Mode", MenuInactiveClose);
-            itemLightAttackWeave = new MenuItem("Auto Light Attack Weave", MenuLightAttackWeave);
+            itemLightAttackWeave = new MenuItem("Auto Light Attack Weaving", MenuLightAttackWeave);
             trayMenu.MenuItems.Add(itemAutoClose);
             trayMenu.MenuItems.Add(itemInactiveClose);
             trayMenu.MenuItems.Add("-");
@@ -120,16 +120,15 @@ namespace EsoLauncherCloser
             {
                 script = Encoding.UTF8.GetString(Properties.Resources.eso_light_attack_weave);
             }
-            autoHotkeyEngine = new AutoHotkeyEngine();
             autoHotkeyEngine.LoadScript(script);
             autoHotkeyEngine.SetVar("suspend", "false");
             autoHotkeyEngine.UnSuspend();
-            lightAttackScriptRunning = true;
         }
+
         private void unloadScript()
         {
             autoHotkeyEngine.Terminate();
-            lightAttackScriptRunning = false;
+            autoHotkeyEngine = new AutoHotkeyEngine(AutoHotKeyVersion.v1);
         }
 
         /// <summary>
@@ -187,12 +186,14 @@ namespace EsoLauncherCloser
                 if (lightAttackScriptRunning)
                 {
                     unloadScript();
+                    lightAttackScriptRunning = false;
                 }
                 return;
             }
             if (!lightAttackScriptRunning)
             {
                 startScript();
+                lightAttackScriptRunning = true;
             }
         }
     }
