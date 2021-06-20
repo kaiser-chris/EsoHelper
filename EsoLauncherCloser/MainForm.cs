@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Text;
+using AutoHotkey.Interop;
+using System.IO;
 
 namespace EsoLauncherCloser
 {
@@ -8,10 +11,15 @@ namespace EsoLauncherCloser
     {
         private const string ProcessNameGame = "eso64";
         private const string ProcessNameLauncher = "Bethesda.net_Launcher";
+        private const string ScriptFolder = "scripts";
+        private const string PathLightAttackScript = ScriptFolder + "\\eso-light-attack-weave.ahk";
 
         private DateTime? launcherDetectTime = null;
         private MenuItem itemAutoClose;
         private MenuItem itemInactiveClose;
+        private MenuItem itemLightAttackWeave;
+        private AutoHotkeyEngine autoHotkeyEngine = AutoHotkeyEngine.Instance;
+        private bool lightAttackScriptRunning = false;
 
         public MainForm()
         {
@@ -31,10 +39,17 @@ namespace EsoLauncherCloser
             ContextMenu trayMenu = new ContextMenu();
             itemAutoClose = new MenuItem("Auto Close Mode", MenuAutoClose);
             itemInactiveClose = new MenuItem("Inactive Close Mode", MenuInactiveClose);
+            itemLightAttackWeave = new MenuItem("Auto Light Attack Weave", MenuLightAttackWeave);
             trayMenu.MenuItems.Add(itemAutoClose);
             trayMenu.MenuItems.Add(itemInactiveClose);
             trayMenu.MenuItems.Add("-");
+            trayMenu.MenuItems.Add(itemLightAttackWeave);
+            trayMenu.MenuItems.Add("-");
             trayMenu.MenuItems.Add("Close Application", MenuExit);
+
+            bool weave = Properties.Settings.Default.LightAttackWeave;
+            itemLightAttackWeave.Checked = weave;
+            timerLightAttackWeave.Enabled = weave;
             return trayMenu;
         }
 
@@ -85,6 +100,38 @@ namespace EsoLauncherCloser
             initializeMode();
         }
 
+        private void MenuLightAttackWeave(object sender, EventArgs e)
+        {
+            bool weave = Properties.Settings.Default.LightAttackWeave;
+            itemLightAttackWeave.Checked = !weave;
+            timerLightAttackWeave.Enabled = !weave;
+            Properties.Settings.Default.LightAttackWeave = !weave;
+            Properties.Settings.Default.Save();
+        }
+
+        private void startScript()
+        {
+            string script;
+            if (File.Exists(PathLightAttackScript))
+            {
+                script = File.ReadAllText(PathLightAttackScript);
+            }
+            else
+            {
+                script = Encoding.UTF8.GetString(Properties.Resources.eso_light_attack_weave);
+            }
+            autoHotkeyEngine.LoadScript(script);
+            autoHotkeyEngine.SetVar("suspend", "false");
+            autoHotkeyEngine.UnSuspend();
+            lightAttackScriptRunning = true;
+        }
+        private void unloadScript()
+        {
+            autoHotkeyEngine.Terminate();
+            autoHotkeyEngine.Reset();
+            lightAttackScriptRunning = false;
+        }
+
         /// <summary>
         /// Closes the launcher as soon as the game starts.
         /// </summary>
@@ -129,6 +176,23 @@ namespace EsoLauncherCloser
                 {
                     process.Kill();
                 }
+            }
+        }
+
+        private void timerAutoHotKeyManager_Tick(object sender, EventArgs e)
+        {
+            Process[] gameProcesses = Process.GetProcessesByName(ProcessNameGame);
+            if (gameProcesses.Length <= 0)
+            {
+                if (lightAttackScriptRunning)
+                {
+                    unloadScript();
+                }
+                return;
+            }
+            if (!lightAttackScriptRunning)
+            {
+                startScript();
             }
         }
     }

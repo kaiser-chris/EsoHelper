@@ -34,5 +34,17 @@ namespace EsoLauncherCloser.Properties {
                 this["Mode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LightAttackWeave {
+            get {
+                return ((bool)(this["LightAttackWeave"]));
+            }
+            set {
+                this["LightAttackWeave"] = value;
+            }
+        }
     }
 }

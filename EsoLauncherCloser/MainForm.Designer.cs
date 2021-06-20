@@ -34,6 +34,7 @@ namespace EsoLauncherCloser
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.timerLauncherAutoClose = new System.Windows.Forms.Timer(this.components);
             this.timerLauncherInactiveClose = new System.Windows.Forms.Timer(this.components);
+            this.timerLightAttackWeave = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // trayIcon
@@ -51,6 +52,11 @@ namespace EsoLauncherCloser
             // 
             this.timerLauncherInactiveClose.Interval = 1000;
             this.timerLauncherInactiveClose.Tick += new System.EventHandler(this.timerLauncherInactiveClose_Tick);
+            // 
+            // timerLightAttackWeave
+            // 
+            this.timerLightAttackWeave.Interval = 1000;
+            this.timerLightAttackWeave.Tick += new System.EventHandler(this.timerAutoHotKeyManager_Tick);
             // 
             // MainForm
             // 
@@ -71,6 +77,7 @@ namespace EsoLauncherCloser
         private System.Windows.Forms.NotifyIcon trayIcon;
         private System.Windows.Forms.Timer timerLauncherAutoClose;
         private System.Windows.Forms.Timer timerLauncherInactiveClose;
+        private System.Windows.Forms.Timer timerLightAttackWeave;
     }
 }
 
