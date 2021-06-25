@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BF15BAB6-6A84-4172-876A-E6C44BA7EB4D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>EsoLauncherCloser</RootNamespace>
-    <AssemblyName>EsoLauncherCloser</AssemblyName>
+    <RootNamespace>EsoHelper</RootNamespace>
+    <AssemblyName>EsoHelper</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
