@@ -10,6 +10,7 @@ namespace EsoLauncherCloser
     public partial class MainForm : Form
     {
         private const string ProcessNameGame = "eso64";
+        private const string ProcessTitleGame = "Elder Scrolls Online";
         private const string ProcessNameLauncher = "Bethesda.net_Launcher";
         private const string ScriptFolder = "scripts";
         private const string PathLightAttackScript = ScriptFolder + "\\eso-light-attack-weave.ahk";
@@ -131,6 +132,23 @@ namespace EsoLauncherCloser
             autoHotkeyEngine = new AutoHotkeyEngine(AutoHotKeyVersion.v1);
         }
 
+        private bool isGameRunning()
+        {
+            Process[] gameProcesses = Process.GetProcessesByName(ProcessNameGame);
+            if (gameProcesses.Length <= 0)
+            {
+                return false;
+            }
+            foreach (var process in gameProcesses)
+            {
+                if (process.MainWindowTitle == ProcessTitleGame)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Closes the launcher as soon as the game starts.
         /// </summary>
@@ -138,8 +156,7 @@ namespace EsoLauncherCloser
         /// <param name="e"></param>
         private void timerLauncherAutoClose_Tick(object sender, EventArgs e)
         {
-            Process[] gameProcesses = Process.GetProcessesByName(ProcessNameGame);
-            if (gameProcesses.Length <= 0)
+            if (!isGameRunning())
             {
                 return;
             }
@@ -158,14 +175,13 @@ namespace EsoLauncherCloser
         /// <param name="e"></param>
         private void timerLauncherInactiveClose_Tick(object sender, EventArgs e)
         {
-            Process[] gameProcesses = Process.GetProcessesByName(ProcessNameGame);
             Process[] launcherProcesses = Process.GetProcessesByName(ProcessNameLauncher);
             if (launcherProcesses.Length <= 0)
             {
                 launcherDetectTime = null;
                 return;
             }
-            else if ((launcherProcesses.Length > 0 && launcherDetectTime == null) || (launcherProcesses.Length > 0 && gameProcesses.Length > 0))
+            else if ((launcherProcesses.Length > 0 && launcherDetectTime == null) || (launcherProcesses.Length > 0 && isGameRunning()))
             {
                 launcherDetectTime = DateTime.Now;
             }
@@ -180,8 +196,7 @@ namespace EsoLauncherCloser
 
         private void timerAutoHotKeyManager_Tick(object sender, EventArgs e)
         {
-            Process[] gameProcesses = Process.GetProcessesByName(ProcessNameGame);
-            if (gameProcesses.Length <= 0)
+            if (!isGameRunning())
             {
                 if (lightAttackScriptRunning)
                 {
