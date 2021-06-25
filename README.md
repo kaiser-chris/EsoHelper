@@ -1,4 +1,4 @@
-# ESO Launcher Closer
+# ESO Helper
 Simple tray application that closes the Elder Scrolls Online Launcher and more.
 
 #### Screenshot

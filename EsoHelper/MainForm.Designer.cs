@@ -1,5 +1,5 @@
 ﻿
-namespace EsoLauncherCloser
+namespace EsoHelper
 {
     partial class MainForm
     {

@@ -5,7 +5,7 @@ using System.Text;
 using AutoHotkey.Interop;
 using System.IO;
 
-namespace EsoLauncherCloser
+namespace EsoHelper
 {
     public partial class MainForm : Form
     {

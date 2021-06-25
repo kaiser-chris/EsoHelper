@@ -1,3 +1,3 @@
-[submodule "EsoLauncherCloser/scripts/eso-light-attack-weave"]
-	path = EsoLauncherCloser/scripts/eso-light-attack-weave
+[submodule "EsoHelper/scripts/eso-light-attack-weave"]
+	path = EsoHelper/scripts/eso-light-attack-weave
 	url = https://github.com/256shadesofgrey/eso-light-attack-weave
