@@ -19,7 +19,7 @@ This can be useful if you are experimenting with addons or are generally restart
 
 #### Auto Light Attack Weaving
 When active this [script](https://github.com/256shadesofgrey/eso-light-attack-weave) (by [256shadesofgrey](https://github.com/256shadesofgrey)) will be run. The script will start **unsuspended** and can be suspended by pressing *tab*. For more information read the [documentation](https://github.com/256shadesofgrey/eso-light-attack-weave/blob/master/README.md). If you want to provide your own script or use a different configuration place your script file like this:
-  * EsoLauncherCloser.exe
+  * EsoHelper.exe
   * scripts
 	  * eso-light-attack-weave.ahk <= Your script
 
